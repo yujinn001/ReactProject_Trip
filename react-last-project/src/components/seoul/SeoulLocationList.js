@@ -2,26 +2,26 @@ import {useState,useEffect,Fragment} from "react";
 import axios from "axios";
 import {NavLink} from "react-router-dom";
 
-function FoodList(){
-    const [foodList,setFoodList]=useState([]);
+function SeoulLocationList(){
+    const [seoulLocationList,setSeoulLocationList]=useState([]);
     const [curpage,setCurpage]=useState(1);
     const [totalpage,setTotalpage]=useState(0);
     const [startPage,setStartPage]=useState(0);
     const [endPage,setEndPage]=useState(0);
 
     useEffect(()=>{
-        axios.get('http://localhost/jeju/food_list_react',{
+        axios.get('http://localhost/seoul/location_list_react',{
             params:{
                 page:curpage
             }
         }).then(response=>{
             console.log(response.data)
-            setFoodList(response.data);
+            setSeoulLocationList(response.data);
         })
     },[])
 
     useEffect(()=>{
-        axios.get("http://localhost/jeju/food_page_react",{
+        axios.get("http://localhost/seoul/location_page_react",{
             params:{
                 page:curpage
             }
@@ -37,16 +37,16 @@ function FoodList(){
 
     // 이벤트 처리
     const pages=(page)=>{
-        axios.get('http://localhost/jeju/food_list_react',{
+        axios.get('http://localhost/seoul/location_list_react',{
             params:{
                 page:page
             }
         }).then(response=>{
             console.log(response.data)
-            setFoodList(response.data);
+            setSeoulLocationList(response.data);
         })
 
-        axios.get("http://localhost/jeju/food_page_react",{
+        axios.get("http://localhost/seoul/location_page_react",{
             params:{
                 page:page
             }
@@ -71,10 +71,11 @@ function FoodList(){
         pages(endPage+1)
     }
 
-    let html=foodList.map((food,index)=>
+    let html=seoulLocationList.map((location,index)=>
         <li className={index%4==0?'one_quarter first':'one_quarter' }>
-            <NavLink to={"/jeju/food_detail/"+food.no}>
-                <img src={food.poster} title={food.title}/>
+            <NavLink to={"/seoul/location_detail/"+location.no}>
+                <img src={location.poster} title={location.title}/>
+                <b style={{"textAlign":"center"}}>{location.title}</b>
             </NavLink>
         </li>
     )
@@ -105,10 +106,11 @@ function FoodList(){
             <div className="wrapper row3">
                 <main className="hoc container clear">
 
-                    <div className="content">
+                    <div className="content" style={{"fontFamily":"TAEBAEKmilkyway"}}>
                         <div id="gallery">
                             <figure>
-                                <header className="heading"><b>제주 맛집</b></header>
+                                <div  style={{"textAlign":"center","fontSize":"30px"}} ><b>서울 명소</b></div>
+                                <div style={{"height":"50px"}}></div>
                                 <ul className="nospace clear">
                                     {html}
                                 </ul>
@@ -129,4 +131,4 @@ function FoodList(){
     )
 }
 
-export  default FoodList;
+export  default SeoulLocationList;

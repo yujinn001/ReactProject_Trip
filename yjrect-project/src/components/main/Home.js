@@ -5,7 +5,7 @@ function Home(){
     const [foodTop,setFoodTop]=useState([]);
     //  서버 연결 후 데이터 읽기
     useEffect(()=>{
-        axios.get("http://localhost/jeju/food_top6").then(response=>{
+        axios.get("http://localhost/food/food_top6").then(response=>{
             console.log(response.data)
             setFoodTop(response.data)
         })

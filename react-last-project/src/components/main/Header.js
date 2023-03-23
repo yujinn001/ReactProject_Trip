@@ -23,31 +23,37 @@ import {NavLink} from "react-router-dom";
 // <Header/> => return 값을 읽어서 => index.html
 function Header(props){
     return (
-        <div className="wrapper row1">
-            <header id="header" className="hoc clear">
+        <div className="wrapper row1" >
+            <header id="header" className="hoc clear" style={{"fontFamily":"TAEBAEKmilkyway"}}>
                 <div id="logo" className="fl_left">
-                    <h1 className="logoname"><NavLink to={"/"}> 제주<span>맛집</span>서울여행</NavLink></h1>
+                    <h1   className="" style={{"fontFamily":"TAEBAEKmilkyway","fontSize":"30px"}}><NavLink to={"/"} ><b>서울 어때</b></NavLink></h1>
                 </div>
                 <nav id="mainav" className="fl_right">
-                    <ul className="clear">
-                        <li className="active"><a href="index.html">Home</a></li>
-                        <li><NavLink to={"/"}>제주</NavLink>
+                    <ul className="clear" >
+                        <li><NavLink to={"/"}>홈</NavLink></li>
+                        <li><a className="drop" href="#">서울</a>
                             <ul>
-                                <li><NavLink to={"/jeju/food_list"}>맛집</NavLink></li>
-                                <li><NavLink to={"/jeju/event_list"}>행사&이벤트</NavLink></li>
-                            </ul>
-                        </li>
-                        <li><a className="drop" href="#">서울여행</a>
-                            <ul>
-                                <li><a href="pages/gallery.html">명소</a></li>
-                                <li><a href="pages/full-width.html">자연/관광</a></li>
+                                <li><NavLink to={"/seoul/seoul_location"}>명소</NavLink></li>
+                                <li><a href="pages/full-width.html">자연&관광</a></li>
                                 <li><a href="pages/full-width.html">쇼핑</a></li>
                             </ul>
                         </li>
+                        <li><a className="drop" href="#">제주</a>
+                            <ul>
+                                <li><NavLink to={"/jeju/food_list"}>제주맛집</NavLink></li>
+                                <li><NavLink to={"/jeju/location_list"}>제주명소</NavLink></li>
+                            </ul>
+                        </li>
+                        <li><a className="drop" href="#">맛집</a>
+                            <ul>
+                                <li><a href="/food/food_list">맛집</a></li>
+                            </ul>
+                        </li>
+
                         <li><a className="drop" href="#">레시피</a>
                             <ul>
-                                <li><NavLink to={"/recipe/recipe_list"}>레시피</NavLink></li>
-                                <li><a href="pages/full-width.html">쉐프</a></li>
+                                <li><a href="/recipe/recipe_list">레시피</a></li>
+                                <li><a href="#">셰프</a></li>
                             </ul>
                         </li>
                         <li><a href="#">커뮤니티</a></li>

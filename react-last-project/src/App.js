@@ -9,6 +9,12 @@ import Header from "./components/main/Header";
 import FoodList from "./components/food/FoodList";
 import EventList from "./components/food/EventList";
 import RecipeList from "./components/recipe/RecipeList";
+import FoodDetail from "./components/food/FoodDetail";
+import SeoulFoodList from "./components/seoulfood/SeoulFoodList";
+import SeoulFoodDetail from "./components/seoulfood/SeoulFoodDetail";
+import SeoulLocationList from "./components/seoul/SeoulLocationList";
+import SeoulLocationDetail from "./components/seoul/SeoulLocationDetail";
+//<Route path={"/jeju/food_detail/:no"}  element={<FoodDetail/>}/> => PathVariable
 function App() {
   return (
     <Router>
@@ -19,6 +25,11 @@ function App() {
            <Route path={"/jeju/food_list"}  element={<FoodList/>}/>
              <Route path={"/jeju/event_list"}  element={<EventList/>}/>
              <Route path={"/recipe/recipe_list"}  element={<RecipeList/>}/>
+             <Route path={"/jeju/food_detail/:no"}  element={<FoodDetail/>}/>
+             <Route path={"/food/food_list"} element={<SeoulFoodList/>}/>
+             <Route path={"/food/food_detail/:fno"} element={<SeoulFoodDetail/>}/>
+             <Route path={"/seoul/seoul_location"} element={<SeoulLocationList/>}/>
+             <Route path={"/seoul/location_detail/:no"} element={<SeoulLocationDetail/>}/>
          </Routes>
         <Footer/>
       </Fragment>
