@@ -1,6 +1,104 @@
 import {useEffect,useState,Fragment} from "react";
+import axios from "axios";
 
 function EventList(){
+    const [locationList,setLocationList]=useState([]);
+    const [curpage,setCurpage]=useState(1);
+    const [totalpage,setTotalpage]=useState(0);
+    const [startPage,setStartPage]=useState(0);
+    const [endPage,setEndPage]=useState(0);
+
+    useEffect(()=>{
+        axios.get('http://localhost/jeju/location_list_react',{
+            params:{
+                page:curpage
+            }
+        }).then(response=>{
+            console.log(response.data)
+            setLocationList(response.data);
+        })
+    },[])
+
+    useEffect(()=>{
+        axios.get("http://localhost/jeju/location_page_react",{
+            params:{
+                page:curpage
+            }
+        }).then(response=>{
+            console.log(response.data)
+            setTotalpage(response.data.totalpage)
+            setCurpage(response.data.curpage)
+            setStartPage(response.data.startPage)
+            setEndPage(response.data.endPage)
+
+        })
+    },{})
+
+    // 이벤트 처리
+    const pages=(page)=>{
+        axios.get('http://localhost/jeju/location_list_react',{
+            params:{
+                page:page
+            }
+        }).then(response=>{
+            console.log(response.data)
+            setLocationList(response.data);
+        })
+
+        axios.get("http://localhost/jeju/location_page_react",{
+            params:{
+                page:page
+            }
+        }).then(response=>{
+            console.log(response.data)
+            setTotalpage(response.data.totalpage)
+            setCurpage(response.data.curpage)
+            setStartPage(response.data.startPage)
+            setEndPage(response.data.endPage)
+
+        })
+    }
+    const pageChange=(page)=>{
+        pages(page)
+    }
+    const pagePrev=()=>{
+        pages(startPage-1)
+
+    }
+
+    const pageNext=()=>{
+        pages(endPage+1)
+    }
+
+    let html=locationList.map((food,index)=>
+        <li className={index%4==0?'one_quarter first':'one_quarter' }>
+            <a href="#">
+                <img src={food.poster} title={food.title}/>
+            </a>
+        </li>
+    )
+
+    let row=[];
+    if(startPage>1)
+    {// 배열에 추가
+        row.push( <li><a href="#" onClick={()=>pagePrev()}>&laquo; Previous</a></li>)
+    }
+    for(let i=startPage;i<=endPage;i++)
+    {
+        if(i==curpage)
+        {
+            row.push(<li className="current"><strong><a href={"#"} onClick={()=>pageChange(i)}> {i}</a></strong></li>)
+        }
+        else
+        {
+            row.push(<li><a href={"#"} onClick={()=>pageChange(i)}>{i}</a></li>)
+        }
+    }
+    if(endPage<totalpage)
+    {
+        row.push(<li><a href={"#"} onClick={()=>pageNext()}>Next &raquo;</a></li>)
+    }
+
     return (
         <Fragment>
             <div className="wrapper row3">
@@ -9,50 +107,16 @@ function EventList(){
                     <div className="content">
                         <div id="gallery">
                             <figure>
-                                <header className="heading">제주 이벤트 & 행사</header>
+                                <header className="heading"><b>제주 명소</b></header>
                                 <ul className="nospace clear">
-                                    <li className="one_quarter first"><a href="#"><img src="../images/demo/gallery/01.png"
-                                                                                       alt="/"/></a></li>
-                                    <li className="one_quarter"><a href="#"><img src="../images/demo/gallery/01.png" alt=""/></a>
-                                    </li>
-                                    <li className="one_quarter"><a href="#"><img src="../images/demo/gallery/01.png" alt=""/></a>
-                                    </li>
-                                    <li className="one_quarter"><a href="#"><img src="../images/demo/gallery/01.png" alt=""/></a>
-                                    </li>
-                                    <li className="one_quarter first"><a href="#"><img src="../images/demo/gallery/01.png"
-                                                                                       alt=""/></a></li>
-                                    <li className="one_quarter"><a href="#"><img src="../images/demo/gallery/01.png" alt=""/></a>
-                                    </li>
-                                    <li className="one_quarter"><a href="#"><img src="../images/demo/gallery/01.png" alt=""/></a>
-                                    </li>
-                                    <li className="one_quarter"><a href="#"><img src="../images/demo/gallery/01.png" alt=""/></a>
-                                    </li>
-                                    <li className="one_quarter first"><a href="#"><img src="../images/demo/gallery/01.png"
-                                                                                       alt=""/></a></li>
-                                    <li className="one_quarter"><a href="#"><img src="../images/demo/gallery/01.png" alt=""/></a>
-                                    </li>
-                                    <li className="one_quarter"><a href="#"><img src="../images/demo/gallery/01.png" alt=""/></a>
-                                    </li>
-                                    <li className="one_quarter"><a href="#"><img src="../images/demo/gallery/01.png" alt=""/></a>
-                                    </li>
+                                    {html}
                                 </ul>
                             </figure>
                         </div>
 
                         <nav className="pagination">
                             <ul>
-                                <li><a href="#">&laquo; Previous</a></li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><strong>&hellip;</strong></li>
-                                <li><a href="#">6</a></li>
-                                <li className="current"><strong>7</strong></li>
-                                <li><a href="#">8</a></li>
-                                <li><a href="#">9</a></li>
-                                <li><strong>&hellip;</strong></li>
-                                <li><a href="#">14</a></li>
-                                <li><a href="#">15</a></li>
-                                <li><a href="#">Next &raquo;</a></li>
+                                {row}
                             </ul>
                         </nav>
                     </div>
@@ -62,6 +126,7 @@ function EventList(){
             </div>
         </Fragment>
     )
+
 }
 
 export  default  EventList;

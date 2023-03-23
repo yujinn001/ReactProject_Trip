@@ -1,26 +1,26 @@
-import {useState,useEffect,Fragment} from "react";
+import {useState, useEffect, Fragment} from "react";
 import axios from "axios";
 
-function FoodList(){
-    const [foodList,setFoodList]=useState([]);
+function RecipeList(){
+    const [RecipeList,setRecipeList]=useState([]);
     const [curpage,setCurpage]=useState(1);
     const [totalpage,setTotalpage]=useState(0);
     const [startPage,setStartPage]=useState(0);
     const [endPage,setEndPage]=useState(0);
 
     useEffect(()=>{
-        axios.get('http://localhost/jeju/food_list_react',{
+        axios.get('http://localhost/recipe/recipe_list_react',{
             params:{
                 page:curpage
             }
         }).then(response=>{
             console.log(response.data)
-            setFoodList(response.data);
+            setRecipeList(response.data);
         })
     },[])
 
     useEffect(()=>{
-        axios.get("http://localhost/jeju/food_page_react",{
+        axios.get("http://localhost/recipe/recipe_page_react",{
             params:{
                 page:curpage
             }
@@ -36,16 +36,16 @@ function FoodList(){
 
     // 이벤트 처리
     const pages=(page)=>{
-        axios.get('http://localhost/jeju/food_list_react',{
+        axios.get('http://localhost/recipe/recipe_list_react',{
             params:{
                 page:page
             }
         }).then(response=>{
             console.log(response.data)
-            setFoodList(response.data);
+            setRecipeList(response.data);
         })
 
-        axios.get("http://localhost/jeju/food_page_react",{
+        axios.get("http://localhost/recipe/recipe_page_react",{
             params:{
                 page:page
             }
@@ -70,10 +70,10 @@ function FoodList(){
         pages(endPage+1)
     }
 
-    let html=foodList.map((food,index)=>
+    let html=RecipeList.map((recipe,index)=>
         <li className={index%4==0?'one_quarter first':'one_quarter' }>
             <a href="#">
-                <img src={food.poster} title={food.title}/>
+                <img src={recipe.poster} title={recipe.title}/>
             </a>
         </li>
     )
@@ -107,7 +107,7 @@ function FoodList(){
                     <div className="content">
                         <div id="gallery">
                             <figure>
-                                <header className="heading"><b>제주 맛집</b></header>
+                                <header className="heading"><b>레시피</b></header>
                                 <ul className="nospace clear">
                                     {html}
                                 </ul>
@@ -128,4 +128,4 @@ function FoodList(){
     )
 }
 
-export  default FoodList;
+export default RecipeList;
