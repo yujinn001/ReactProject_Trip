@@ -16,6 +16,7 @@ function SeoulFoodDetail(props)
             setFoodDetail(response.data)
         })
     },{})
+    document.cookie="food"+parseInt(fno)+"="+foodDetail.poster;
     useEffect(()=>{
         const script=document.createElement("script")
         script.async=true
@@ -96,22 +97,22 @@ function SeoulFoodDetail(props)
         BAD int
      */
     return (
-        <div className="wrapper row3">
+        <div className="wrapper row3" style={{"fontFamily":"TAEBAEKmilkyway"}}>
             <main className="hoc container clear">
                 <div className="content three_quarter first">
-                    <table className={"table"}>
+                    <table className={"table"} >
                         <tbody>
-                        <tr>
-                            <td width={"30%"} rowSpan={"7"}>
-                                <img src={foodDetail.poster} style={{"width":"900px","height":"300px"}}/>
+                        <tr >
+                            <td width={"20%"} rowSpan={"7"}>
+                                <img src={foodDetail.poster} style={{"width":"841px","height":"450px"}}/>
                             </td>
                         </tr>
                         </tbody>
                     </table>
-                    <table className={"table"}>
+                    <table className={"table"} style={{"width":"841px","height":"500px"}}>
                         <tbody>
                         <tr>
-                            <td colSpan={"2"} style={{"textAlign":"center","fontSize":"25px"}}>{foodDetail.name}</td>
+                            <td colSpan={"2"} style={{"textAlign":"center","fontSize":"25px"}}><b>{foodDetail.name}</b></td>
                         </tr>
                         <tr>
                             <th width={"20%"} >주소</th>
@@ -145,7 +146,7 @@ function SeoulFoodDetail(props)
                     </table>
                 </div>
                 <div className="sidebar one_quarter">
-                    <div id="map" style={{"width":"100%","height":"350px"}}></div>
+                    <div id="map" style={{"width":"100%","height":"450px"}}></div>
                 </div>
             </main>
         </div>

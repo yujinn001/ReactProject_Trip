@@ -103,7 +103,7 @@ function SeoulLocationList(){
 
     return (
         <Fragment>
-            <div className="wrapper row3">
+            <div className="wrapper row3" style={{"fontFamily":"TAEBAEKmilkyway"}}>
                 <main className="hoc container clear">
 
                     <div className="content" style={{"fontFamily":"TAEBAEKmilkyway"}}>

@@ -2,22 +2,22 @@ import {useEffect,useState} from "react";
 import {useParams} from "react-router";
 import axios from "axios";
 /* global kakao */
-function FoodDetail(props)
+function JunsiDetail(props)
 {
-    let {no}=useParams();
-    const [foodDetail,setFoodDetail]=useState({})
+    let {geno}=useParams();
+    const [junsiDetail,setJunsiDetail]=useState({})
     useEffect(()=>{
-        axios.get("http://localhost/jeju/food_detail_react",{
+        axios.get("http://localhost/seoul/junsi_detail_react",{
             params:{
-                no:no
+                geno:geno
             }
         }).then(response=>{
             console.log(response.data)
-            setFoodDetail(response.data)
+            setJunsiDetail(response.data)
         })
     },{})
     // jeju1=.jpg
-    document.cookie="jeju"+parseInt(no)+"="+foodDetail.poster;
+    document.cookie="jeju"+parseInt(geno)+"="+junsiDetail.poster;
     useEffect(()=>{
         const script=document.createElement("script")
         script.async=true
@@ -37,7 +37,7 @@ function FoodDetail(props)
             var geocoder = new kakao.maps.services.Geocoder();
 
             // 주소로 좌표를 검색합니다
-            geocoder.addressSearch(foodDetail.addr, function (result, status) {
+            geocoder.addressSearch(junsiDetail.loc, function (result, status) {
 
                 // 정상적으로 검색이 완료됐으면
                 if (status === kakao.maps.services.Status.OK) {
@@ -52,7 +52,7 @@ function FoodDetail(props)
 
                     // 인포윈도우로 장소에 대한 설명을 표시합니다
                     var infowindow = new kakao.maps.InfoWindow({
-                        content: '<div style={{"width":"150px","textAlign":"center","padding":"6px 0"}}>'+foodDetail.title+'</div>'
+                        content: '<div style={{"width":"150px","textAlign":"center","padding":"6px 0"}}>'+junsiDetail.title+'</div>'
                     });
                     infowindow.open(map, marker);
 
@@ -62,20 +62,7 @@ function FoodDetail(props)
             });
         }
     })
-    let mm=String(foodDetail.menu)
-    let aa=mm.indexOf("^");
-    let h='';
-    if(aa>=0)
-    {
-        let menu=foodDetail.menu.split("^")
-        h=menu.map(m=>
-            <li>{m}</li>
-        )
-    }
-    else
-    {
-        h='등록없음'
-    }
+
 
     /*
        TITLE      VARCHAR2(200)
@@ -100,44 +87,44 @@ function FoodDetail(props)
                         <tbody>
                         <tr>
                             <td width={"30%"} rowSpan={"7"}>
-                                <img src={foodDetail.poster} style={{"width":"900px","height":"400px"}}/>
+                                <img src={junsiDetail.poster} style={{"width":"900px","height":"700px"}}/>
                             </td>
                         </tr>
                         </tbody>
                     </table>
-                    <table className={"table"}>
+                    <table className={"table"} style={{"width":"841px","height":"500px","fontFamily":"TAEBAEKmilkyway"}}>
                         <tbody>
                         <tr>
-                            <td colSpan={"2"}>{foodDetail.title}</td>
+                            <td colSpan={"2"} style={{"textAlign":"center","fontSize":"25px"}}>{junsiDetail.title}</td>
                         </tr>
                         <tr>
                             <th width={"20%"}>주소</th>
-                            <td width={"50%"}>{foodDetail.addr}</td>
+                            <td width={"50%"}>{junsiDetail.loc
+                            }</td>
                         </tr>
                         <tr>
-                            <th width={"20%"}>전화</th>
-                            <td width={"50%"}>{foodDetail.tel}</td>
+                            <th width={"20%"}>시간</th>
+                            <td width={"50%"}>{junsiDetail.time}</td>
                         </tr>
                         <tr>
-                            <th width={"20%"}>음식종류</th>
-                            <td width={"50%"}>{foodDetail.type}</td>
+                            <th width={"20%"}>전시기간</th>
+                            <td width={"50%"}>{junsiDetail.period}</td>
                         </tr>
                         <tr>
-                            <th width={"20%"}>영업시간</th>
-                            <td width={"50%"}>{foodDetail.time}</td>
+                            <th width={"20%"}>종류</th>
+                            <td width={"50%"}>{junsiDetail.area}</td>
                         </tr>
                         <tr>
-                            <th width={"20%"}>주차</th>
-                            <td width={"50%"}>{foodDetail.parking}</td>
+                            <th width={"20%"}>아이템</th>
+                            <td width={"50%"}>{junsiDetail.item}</td>
                         </tr>
                         <tr>
-                            <th width={"20%"}>메뉴</th>
-                            <td width={"50%"}>
-                                <ul>
-                                    {h}
-                                </ul>
-
-                            </td>
+                            <th width={"20%"}>주최</th>
+                            <td width={"50%"}>{junsiDetail.host}</td>
+                        </tr>
+                        <tr>
+                            <th width={"20%"}>가격</th>
+                            <td width={"50%"}>{junsiDetail.price}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -150,4 +137,4 @@ function FoodDetail(props)
     )
 }
 
-export default FoodDetail
+export default JunsiDetail;

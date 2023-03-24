@@ -23,10 +23,10 @@ import {NavLink} from "react-router-dom";
 // <Header/> => return 값을 읽어서 => index.html
 function Header(props){
     return (
-        <div className="wrapper row1" >
+        <div className="wrapper row1" style={{"backgroundColor": "#715aa5"}}>
             <header id="header" className="hoc clear" style={{"fontFamily":"TAEBAEKmilkyway"}}>
                 <div id="logo" className="fl_left">
-                    <h1   className="" style={{"fontFamily":"TAEBAEKmilkyway","fontSize":"30px"}}><NavLink to={"/"} ><b>서울 어때</b></NavLink></h1>
+                    <h1   className="" style={{"fontFamily":"TAEBAEKmilkyway","fontSize":"30px"}}><NavLink to={"/"} ><b style={{"color":"white"}}>서울 어때</b></NavLink></h1>
                 </div>
                 <nav id="mainav" className="fl_right">
                     <ul className="clear" >
@@ -38,25 +38,34 @@ function Header(props){
                                 <li><a href="pages/full-width.html">쇼핑</a></li>
                             </ul>
                         </li>
-                        <li><a className="drop" href="#">제주</a>
+                        {/*<li><a className="drop" href="#">제주</a>
                             <ul>
                                 <li><NavLink to={"/jeju/food_list"}>제주맛집</NavLink></li>
                                 <li><NavLink to={"/jeju/location_list"}>제주명소</NavLink></li>
                             </ul>
-                        </li>
-                        <li><a className="drop" href="#">맛집</a>
+                        </li>*/}
+                        <li><a className="drop" href="#">맛집 소개</a>
                             <ul>
                                 <li><a href="/food/food_list">맛집</a></li>
                             </ul>
                         </li>
-
-                        <li><a className="drop" href="#">레시피</a>
+                        <li><a className="drop" href="#">문화생활</a>
                             <ul>
-                                <li><a href="/recipe/recipe_list">레시피</a></li>
+                                <li><a href="/seoul/jisi_find">전시회</a></li>
+                            </ul>
+                        </li>
+                        {/*<li><a className="drop" href="#">레시피</a>
+                            <ul>
+                                <li><NavLink to={"/recipe/recipe_list"}>레시피</NavLink></li>
                                 <li><a href="#">셰프</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">커뮤니티</a></li>
+                        <li><NavLink to={"/jeju/food_find"}>맛집 검색</NavLink></li> */}
+                        <li><a className="drop" href="#">오늘의 뉴스</a>
+                            <ul>
+                                <li><NavLink to={"/news/news_list"}>뉴스 검색</NavLink></li>
+                            </ul>
+                        </li>
                     </ul>
                 </nav>
             </header>

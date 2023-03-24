@@ -14,6 +14,10 @@ import SeoulFoodList from "./components/seoulfood/SeoulFoodList";
 import SeoulFoodDetail from "./components/seoulfood/SeoulFoodDetail";
 import SeoulLocationList from "./components/seoul/SeoulLocationList";
 import SeoulLocationDetail from "./components/seoul/SeoulLocationDetail";
+import FoodFind from "./components/food/FoodFind";
+import NewsList from "./components/news/NewsList";
+import JunsiFind from "./components/junsi/JunsiFind";
+import JunsiDetail from "./components/junsi/JunsiDetail";
 //<Route path={"/jeju/food_detail/:no"}  element={<FoodDetail/>}/> => PathVariable
 function App() {
   return (
@@ -30,6 +34,10 @@ function App() {
              <Route path={"/food/food_detail/:fno"} element={<SeoulFoodDetail/>}/>
              <Route path={"/seoul/seoul_location"} element={<SeoulLocationList/>}/>
              <Route path={"/seoul/location_detail/:no"} element={<SeoulLocationDetail/>}/>
+             <Route path={"/jeju/food_find"} element={<FoodFind/>}/>
+             <Route path={"/news/news_list"} element={<NewsList/>}/>
+             <Route path={"/seoul/jisi_find"} element={<JunsiFind/>}/>
+             <Route path={"/seoul/junsi_detail/:geno"} element={<JunsiDetail/>}/>
          </Routes>
         <Footer/>
       </Fragment>

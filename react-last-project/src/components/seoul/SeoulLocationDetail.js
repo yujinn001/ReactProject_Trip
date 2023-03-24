@@ -83,35 +83,37 @@ function SeoulLocationDetail(props)
         BAD int
      */
     return (
-        <div className="wrapper row3">
+        <div className="wrapper row3" style={{"fontFamily":"TAEBAEKmilkyway"}}>
             <main className="hoc container clear">
                 <div className="content three_quarter first">
-                    <table className={"table"}>
+                    <table className={"table"} >
                         <tbody>
                         <tr>
                             <td width={"30%"} rowSpan={"7"}>
-                                <img src={seoulLocationDetail.poster} style={{"width":"900px","height":"300px"}}/>
+                                <img src={seoulLocationDetail.poster} style={{"width":"841px","height":"400px"}}/>
                             </td>
                         </tr>
                         </tbody>
                     </table>
-                    <table className={"table"}>
+                    <table className={"table"} style={{"width":"841px","height":"200px"}}>
                         <tbody>
                         <tr>
-                            <td colSpan={"2"} style={{"fontSize":"25px"}}>{seoulLocationDetail.title} </td>
+                            <th width={"20%"} style={{"textAlign":"center"}}>제목</th>
+                            <td colSpan={"1"} style={{"textAlign":"center","fontSize":"25px"}}>{seoulLocationDetail.title} </td>
                         </tr>
                         <tr>
-                            <td  colSpan={"2"}>{seoulLocationDetail.msg}</td>
+                            <th width={"20%"} style={{"textAlign":"center"}}>설명</th>
+                            <td  colSpan={"1"}>{seoulLocationDetail.msg}</td>
                         </tr>
                         <tr>
-                            <th width={"20%"} >주소</th>
+                            <th width={"20%"} style={{"textAlign":"center"}}>주소</th>
                             <td width={"50%"}>{seoulLocationDetail.address}</td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
                 <div className="sidebar one_quarter">
-                    <div id="map" style={{"width":"100%","height":"350px"}}></div>
+                    <div id="map" style={{"width":"100%","height":"400px"}}></div>
                 </div>
             </main>
         </div>
